@@ -1,5 +1,8 @@
 import express from 'express'
 import { promisify } from 'util'
+import { Env } from '@/core/Env'
+import '@/core/Logger'
+import { Logger } from '@/core/Logger'
 
 import type { Application } from 'express'
 
@@ -7,18 +10,28 @@ export class Server {
   private app: Application
   private port: number
 
-  constructor(port: number) {
+  #env: EnvInfo
+
+  constructor() {
     this.app = express()
-    this.port = port
+    this.port = 3000
   }
 
   public async start() {
-    const listen: (port: number) => Promise<void> = promisify(
-      this.app.listen.bind(this.app)
-    )
+    try {
+      await new Env().loadConfigOfCurrentEnv()
 
-    await listen(this.port)
-    
-    console.log(`Server started at http://localhost:${this.port}`)
+      const listen: (port: number) => Promise<void> = promisify(
+        this.app.listen.bind(this.app)
+      )
+
+      await listen(this.port)
+
+      console.log(`Server started at http://localhost:${this.port}`)
+    } catch (e) {
+      // TODO sau này sẽ đổi sang dùng class singleton global
+      // báo lỗi nếu khởi động máy chủ thất bại
+      new Logger().err(e?.stack || e)
+    }
   }
 }

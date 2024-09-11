@@ -1,7 +1,4 @@
-import { Server } from '@/core/server'
+import { Server } from '@/core/Server'
 
-;(async () => {
-  await new Server(3000).start()
-})()
-
-console.log('Hello World!')
+// khởi động máy chủ
+new Server().start()
