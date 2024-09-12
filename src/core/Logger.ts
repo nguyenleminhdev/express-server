@@ -3,6 +3,18 @@ import { isArray, isPlainObject } from 'lodash'
 
 /**quản lý, hỗ trợ log trong hệ thống */
 export class Logger {
+  /**đối tượng duy nhất của class */
+  private static instance: Logger
+
+  /**lấy đối tượng duy nhất của class */
+  public static getInstance(): Logger {
+    // nếu chưa có instance thì tạo mới
+    if (!Logger.instance) Logger.instance = new Logger()
+
+    // trả về instance duy nhất
+    return Logger.instance
+  }
+
   /**chuyển đổi đối tượng thành chuỗi */
   #stringify(input: any): string {
     return JSON.stringify(input, null, 4)
@@ -37,3 +49,6 @@ export class Logger {
     console.log(chalk.green(...this.#formatInput(messages)))
   }
 }
+
+/**đối tượng log toàn cục */
+export const LOGGER = Logger.getInstance()
