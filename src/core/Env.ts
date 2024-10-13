@@ -3,7 +3,7 @@ import { NotFoundError } from '@/api/errors/NotFound'
 /**dữ liệu của tập tin hằng số */
 interface EnvFile {
   /**dữ liệu sẽ được export default */
-  default?: EnvInfo
+  default?: IEnv
 }
 
 /**nạp dữ liệu hằng số theo môi trường */

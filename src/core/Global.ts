@@ -4,7 +4,7 @@ export class Global {
   private static instance: Global
 
   /**dữ liệu môi trường hiện tại */
-  #env: EnvInfo
+  #env: IEnv
 
   /**lấy đối tượng duy nhất của class */
   public static getInstance(): Global {
@@ -16,12 +16,12 @@ export class Global {
   }
 
   /**ghi dữ liệu môi trường */
-  set env(env: EnvInfo) {
+  set env(env: IEnv) {
     // gán dữ liệu môi trường vào biến private
     this.#env = env
   }
   /**lấy dữ liệu môi trường */
-  get env(): EnvInfo {
+  get env(): IEnv {
     // trả về dữ liệu môi trường
     return this.#env
   }

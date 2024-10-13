@@ -1,4 +1,5 @@
-import { Server } from '@/core/Server'
+import { FactoryEnvSingleton } from '@/core/env/singleton'
 
-// khởi động máy chủ
-new Server().start()
+const $ENV = FactoryEnvSingleton.getInst().getEnv()
+
+console.log($ENV)
