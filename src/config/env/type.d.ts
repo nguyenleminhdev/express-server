@@ -9,5 +9,9 @@ interface IAppEnv {
   }
 }
 
+interface ISomethingEnv {
+
+}
+
 /**thiết lập các hằng số theo từng môi trường */
-interface IEnv extends IAppEnv {}
+interface IEnv extends IAppEnv, ISomethingEnv {}
